@@ -6,7 +6,6 @@ document.addEventListener("DOMContentLoaded", function () {
       const productList = this.nextElementSibling;
 
       if (productList) {
-        // Alternar entre mostrar y ocultar
         if (
           productList.style.display === "none" ||
           productList.style.display === ""
@@ -100,3 +99,25 @@ function removeFromCart(index) {
   localStorage.setItem("cart", JSON.stringify(cart));
   loadCart();
 }
+
+document.addEventListener("DOMContentLoaded", function () {
+  fetch("http://localhost:3000/api/productos")
+    .then((response) => response.json())
+    .then((data) => {
+      const productContainer = document.querySelector(".product-list");
+      productContainer.innerHTML = ""; // Limpiar el contenedor antes de agregar productos
+
+      data.forEach((product) => {
+        const productCard = document.createElement("div");
+        productCard.classList.add("product-card");
+        productCard.innerHTML = `
+                  <h3>${product.nombre}</h3>
+                  <p>${product.descripcion}</p>
+                  <p class="price">${product.precio}€</p>
+                  <button onclick="addToCart('${product.nombre}', ${product.precio})">Afegir al Carret</button>
+              `;
+        productContainer.appendChild(productCard);
+      });
+    })
+    .catch((error) => console.error("Error fetching products:", error));
+});
