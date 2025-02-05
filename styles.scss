@@ -1,0 +1,231 @@
+$color-bg: #f9eccc;
+$color-primary: #4daa57;
+$color-secondary: #587d71;
+$color-highlight: #754668;
+$color-accent: #b5dda4;
+$color-text: #587d71;
+$color-white: white;
+
+@mixin button-style($bg-color, $hover-color) {
+  background-color: $bg-color;
+  color: $color-white;
+  border: none;
+  padding: 10px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+
+  &:hover {
+    background-color: $hover-color;
+  }
+}
+
+body {
+  font-family: Arial, sans-serif;
+  background-color: $color-bg;
+  color: $color-text;
+  margin: 0;
+  padding: 0;
+}
+
+.cart-page,
+.form-page,
+.login-page,
+.signup-page {
+  header {
+    flex-direction: column;
+    height: auto;
+
+    a {
+      padding: 10px;
+      margin: 10px 0;
+      font-weight: bold;
+    }
+  }
+}
+
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 20px;
+  background-color: $color-highlight;
+  height: 100px;
+
+  h1 {
+    color: $color-white;
+  }
+
+  h1:hover {
+    cursor: default;
+  }
+
+  div {
+    display: flex;
+    gap: 30px;
+
+    a {
+      text-decoration: none;
+      color: $color-white;
+      font-size: 20px;
+      transition: transform 0.3s ease, color 0.3s ease;
+
+      &:hover {
+        transform: translateY(-5px);
+        color: $color-primary;
+      }
+    }
+  }
+}
+
+.container {
+  width: 90%;
+  max-width: 1200px;
+  margin: 20px auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  h2:hover {
+    cursor: default;
+  }
+
+  a {
+    text-decoration: none;
+    color: $color-text;
+  }
+}
+
+.product-category,
+.service-category {
+  border-radius: 10px;
+  margin-bottom: 10px;
+  padding: 10px;
+  background: $color-bg;
+}
+
+.toggle-button {
+  width: 100%;
+  @include button-style($color-primary, $color-secondary);
+  font-size: 18px;
+}
+
+.product-list,
+.service-garden,
+.service-pool {
+  display: none;
+  flex-wrap: wrap;
+  gap: 20px;
+  justify-content: center;
+  margin-top: 10px;
+
+  &.active {
+    display: flex;
+  }
+}
+
+.product-card,
+.service-card {
+  background-color: $color-accent;
+  border-radius: 10px;
+  padding: 15px;
+  width: 250px;
+  text-align: center;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+
+  img {
+    width: 100%;
+    height: auto;
+    border-radius: 10px;
+  }
+
+  h3 {
+    color: $color-highlight;
+    cursor: default;
+  }
+
+  p {
+    font-size: 14px;
+    color: $color-secondary;
+    cursor: default;
+  }
+
+  .price {
+    font-weight: bold;
+    color: $color-primary;
+  }
+}
+
+button {
+  @include button-style($color-primary, $color-secondary);
+  margin-top: 10px;
+}
+
+.cart {
+  background-color: $color-white;
+  padding: 15px;
+  border-radius: 10px;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+  margin: 20px auto;
+  max-width: 500px;
+
+  h2 {
+    text-align: center;
+    color: $color-highlight;
+  }
+
+  .cart-item {
+    display: flex;
+    justify-content: space-between;
+    border-bottom: 1px solid $color-accent;
+    padding: 10px 0;
+
+    span {
+      font-weight: bold;
+    }
+  }
+}
+
+.form-container {
+  background-color: $color-bg;
+  padding: 20px;
+  border-radius: 10px;
+  max-width: 500px;
+  margin: 20px auto;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+  overflow: hidden;
+
+  label {
+    font-weight: bold;
+    display: block;
+    margin-bottom: 5px;
+    color: $color-highlight;
+  }
+
+  input,
+  textarea {
+    width: 95%;
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid $color-primary;
+    border-radius: 5px;
+  }
+}
+
+.confirm-btn {
+  @include button-style($color-highlight, $color-secondary);
+  font-weight: bold;
+}
+
+.confirmation {
+  text-align: center;
+  padding: 20px;
+  background-color: $color-accent;
+  color: $color-highlight;
+  font-size: 18px;
+  font-weight: bold;
+  border-radius: 10px;
+  margin: 20px auto;
+  max-width: 500px;
+}
