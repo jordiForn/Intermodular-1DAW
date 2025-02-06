@@ -11,6 +11,7 @@ if ($conn->connect_error) {
 }
 
 $sql = "SELECT * FROM productes 
+WHERE estoc > 0
 ORDER BY 
     CASE 
         WHEN categoria = 'Plantes i llavors' THEN 1
@@ -18,7 +19,7 @@ ORDER BY
         WHEN categoria = 'Ferramentes' THEN 3
         ELSE 4
     END,
-    nom;";
+    nom";
 
 $result = $conn->query($sql);
 
@@ -29,6 +30,8 @@ if ($result->num_rows > 0) {
         $categoria = $row["categoria"];
         $categories[$categoria][] = $row;
     }
+} else {
+    echo "No hi ha productes disponibles.";
 }
 ?>
 
@@ -60,7 +63,7 @@ if ($result->num_rows > 0) {
     <div class="container">
         <h2>Llista de Productes</h2>
         <a href="#service-category">
-            <h3>Busques serveis?</h3>
+            Busques serveis?
         </a>
         <?php foreach ($categories as $categoria => $productes): ?>
         <div class="product-category">
@@ -72,7 +75,12 @@ if ($result->num_rows > 0) {
                         <h3><?= htmlspecialchars($producte['nom']) ?></h3>
                         <p><?= htmlspecialchars($producte['descripcio']) ?></p>
                         <p class="price"><?= number_format($producte['preu'], 2, ",", ".") ?>€</p>
-                        <button onclick="addToCart('<?= addslashes($producte['nom']) ?>', <?= $producte['preu'] ?>)">Afegir al Carret</button>
+                        <p>Estoc disponible: <?= number_format($producte['estoc'], 0, ",", ".") ?></p>
+                        <div class="tooltip-container">
+                            
+                            <button onclick="addToCart('<?= addslashes($producte['nom']) ?>', <?= $producte['preu'] ?>)">Afegir al Carret</button>
+                            <span class="tooltip-text">0 ítems - 0,00€</span>
+                        </div>
                     </div>
                 <?php endforeach; ?>
             </div>
@@ -83,7 +91,7 @@ if ($result->num_rows > 0) {
     
     <div class="container">
     <!-- Sección de Serveis per a Jardins -->
-    <div class="service-category" id="service-category-garden">
+    <div class="service-category" id="service-category">
         <button class="toggle-button">🏡 Serveis per a jardins</button>
         <div class="service-garden">
             <?php
@@ -108,7 +116,7 @@ if ($result->num_rows > 0) {
     </div>
 
     <!-- Sección de Serveis per a Piscines -->
-    <div class="service-category" id="service-category-pool">
+    <div class="service-category" id="service-category">
         <button class="toggle-button">🏊 Serveis per a piscines</button>
         <div class="service-pool">
             <?php

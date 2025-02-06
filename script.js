@@ -47,6 +47,7 @@ function addToCart(name, price) {
 
   localStorage.setItem("cart", JSON.stringify(cart));
   loadCart();
+  updateTooltip();
   alert(name + " s'ha afegit al carret.");
 }
 
@@ -57,26 +58,32 @@ function loadCart() {
   let cartContainer = document.getElementById("cart-items");
   let totalElement = document.getElementById("cart-total");
 
-  cart = JSON.parse(localStorage.getItem("cart")) || [];
-  cartContainer.innerHTML = "";
+  if (!cartContainer || !totalElement) {
+    console.error(
+      "Los elementos #cart-items o #cart-total no existen en el DOM."
+    );
+    return;
+  }
 
+  cart = JSON.parse(localStorage.getItem("cart")) || [];
+  cartContainer.innerHTML = ""; // Limpiar el contenido anterior
   let total = 0;
+
   cart.forEach((item, index) => {
     total += item.price * item.quantity;
-
     let itemElement = document.createElement("div");
     itemElement.classList.add("cart-item");
     itemElement.innerHTML = `
-              <span>${item.name} (x${item.quantity})</span>
-              <span>${(item.price * item.quantity).toFixed(2)}€</span>
-              <button class="remove-btn" data-index="${index}">X</button>
-          `;
+        <span>${item.name} (x${item.quantity})</span>
+        <span>${(item.price * item.quantity).toFixed(2)}€</span>
+        <button class="remove-btn" data-index="${index}">X</button>
+    `;
     cartContainer.appendChild(itemElement);
   });
 
   totalElement.innerText = total.toFixed(2) + "€";
-
   setupCartListeners();
+  updateTooltip();
 }
 
 function setupCartListeners() {
@@ -86,6 +93,35 @@ function setupCartListeners() {
       removeFromCart(index);
     });
   });
+}
+
+function updateTooltip() {
+  const tooltips = document.querySelectorAll(".tooltip-text");
+
+  // Verifica si hay tooltips en el DOM
+  if (!tooltips || tooltips.length === 0) {
+    console.error("No se encontraron elementos .tooltip-text en el DOM.");
+    return;
+  }
+
+  let totalItems = 0;
+  let totalPrice = 0;
+
+  // Calcula el total de items y precio
+  cart.forEach((item) => {
+    totalItems += item.quantity;
+    totalPrice += item.price * item.quantity;
+  });
+
+  // Formatea el precio con coma como separador decimal
+  const formattedPrice = totalPrice.toFixed(2).replace(".", ",");
+
+  // Actualiza todos los tooltips con el mismo valor
+  tooltips.forEach((tooltip) => {
+    tooltip.innerText = `${totalItems} ítems - ${formattedPrice}€`;
+  });
+
+  console.log("Tooltip actualizado:", { totalItems, totalPrice }); // Depuración
 }
 
 function removeFromCart(index) {
@@ -98,26 +134,5 @@ function removeFromCart(index) {
 
   localStorage.setItem("cart", JSON.stringify(cart));
   loadCart();
+  updateTooltip();
 }
-
-document.addEventListener("DOMContentLoaded", function () {
-  fetch("http://localhost:3000/api/productos")
-    .then((response) => response.json())
-    .then((data) => {
-      const productContainer = document.querySelector(".product-list");
-      productContainer.innerHTML = ""; // Limpiar el contenedor antes de agregar productos
-
-      data.forEach((product) => {
-        const productCard = document.createElement("div");
-        productCard.classList.add("product-card");
-        productCard.innerHTML = `
-                  <h3>${product.nombre}</h3>
-                  <p>${product.descripcion}</p>
-                  <p class="price">${product.precio}€</p>
-                  <button onclick="addToCart('${product.nombre}', ${product.precio})">Afegir al Carret</button>
-              `;
-        productContainer.appendChild(productCard);
-      });
-    })
-    .catch((error) => console.error("Error fetching products:", error));
-});
