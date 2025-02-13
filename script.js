@@ -1,5 +1,4 @@
 let cart = JSON.parse(localStorage.getItem("cart")) || [];
-// Función para añadir productos al carrito
 function addToCart(name, price) {
   let existingItem = cart.find((item) => item.name === name);
 
@@ -15,22 +14,10 @@ function addToCart(name, price) {
   alert(name + " s'ha afegit al carret.");
 }
 
-// Función para cargar el carrito y mostrarlo
 document.addEventListener("DOMContentLoaded", loadCart);
-
 function loadCart() {
-  let cartContainer = document.getElementById("cart-items");
-  let totalElement = document.getElementById("cart-total");
-
-  if (!cartContainer || !totalElement) {
-    console.error(
-      "Los elementos #cart-items o #cart-total no existen en el DOM."
-    );
-    return;
-  }
-
   cart = JSON.parse(localStorage.getItem("cart")) || [];
-  cartContainer.innerHTML = ""; // Limpiar el contenido anterior
+  cartContainer.innerHTML = "";
   let total = 0;
 
   cart.forEach((item, index) => {
@@ -60,32 +47,19 @@ function setupCartListeners() {
 }
 
 function updateTooltip() {
-  const tooltips = document.querySelectorAll(".tooltip-text");
-
-  // Verifica si hay tooltips en el DOM
-  if (!tooltips || tooltips.length === 0) {
-    console.error("No se encontraron elementos .tooltip-text en el DOM.");
-    return;
-  }
-
   let totalItems = 0;
   let totalPrice = 0;
 
-  // Calcula el total de items y precio
   cart.forEach((item) => {
     totalItems += item.quantity;
     totalPrice += item.price * item.quantity;
   });
 
-  // Formatea el precio con coma como separador decimal
   const formattedPrice = totalPrice.toFixed(2).replace(".", ",");
 
-  // Actualiza todos los tooltips con el mismo valor
   tooltips.forEach((tooltip) => {
     tooltip.innerText = `${totalItems} ítems - ${formattedPrice}€`;
   });
-
-  console.log("Tooltip actualizado:", { totalItems, totalPrice }); // Depuración
 }
 
 function removeFromCart(index) {

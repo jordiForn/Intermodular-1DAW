@@ -14,7 +14,7 @@ if(isset($_SESSION['username'])){
     if($result->num_rows > 0){
         $rol = $result->fetch_assoc()['rol'];
 
-        if($rol == '1'){
+        if($rol === '1'){
             $isAdmin = true;
             $isLoggedIn = true;
         }else{
@@ -82,6 +82,14 @@ if ($result->num_rows > 0) {
         </div>
     </header>
 
+    <nav id="admin-menu" style="display: none;">
+        <ul>
+            <li><a href="#">Agregar un producte</a></li>
+            <li><a href="#">Canviar un producte</a></li>
+            <li><a href="#">Eliminar un producte</a></li>
+        </ul>
+    </nav>
+
     <div class="container">
         <h2>Llista de Productes</h2>
         <a href="#service-category">
@@ -99,7 +107,6 @@ if ($result->num_rows > 0) {
                         <p class="price"><?= number_format($producte['preu'], 2, ",", ".") ?>€</p>
                         <p>Estoc disponible: <?= number_format($producte['estoc'], 0, ",", ".") ?></p>
                         <div class="tooltip-container">
-                            
                             <button onclick="addToCart('<?= addslashes($producte['nom']) ?>', <?= $producte['preu'] ?>)">Afegir al Carret</button>
                             <span class="tooltip-text">0 ítems - 0,00€</span>
                         </div>
