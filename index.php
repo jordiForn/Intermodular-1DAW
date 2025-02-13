@@ -1,14 +1,5 @@
 <?php
-$servername = "localhost";
-$username = "root";
-$password= "";
-$dbname = "jardineria";
-
-$conn = new mysqli($servername, $username, $password, $dbname);
-
-if ($conn->connect_error) {
-    die("Connection failed: " . $conn->connect_error);
-}
+include 'config.php';
 
 $sql = "SELECT * FROM productes 
 WHERE estoc > 0
@@ -43,8 +34,10 @@ if ($result->num_rows > 0) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Tenda de Jardineria</title>
-    <link rel="stylesheet" href="styles.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
+    <link rel="stylesheet" href="styles.css?v<?php echo time(); ?>">
+    <script src="script.js" defer></script>
+    
 </head>
 
 <body class="index-page">
@@ -141,7 +134,7 @@ if ($result->num_rows > 0) {
     </div>
 </div>
 
-    <script src="script.js"></script>
+    
 </body>
 
 </html>
