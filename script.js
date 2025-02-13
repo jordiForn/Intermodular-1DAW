@@ -1,39 +1,3 @@
-document.addEventListener("DOMContentLoaded", function () {
-  const toggleButtons = document.querySelectorAll(".toggle-button");
-
-  toggleButtons.forEach((button, index) => {
-    button.addEventListener("click", function () {
-      const productList = this.nextElementSibling;
-
-      if (productList) {
-        if (
-          productList.style.display === "none" ||
-          productList.style.display === ""
-        ) {
-          productList.style.display = "flex";
-        } else {
-          productList.style.display = "none";
-        }
-      }
-    });
-
-    // Abrir la primera categoría por defecto
-    if (index === 0) {
-      const firstProductList = button.nextElementSibling;
-      if (firstProductList) {
-        firstProductList.style.display = "flex"; // Abre la primera lista de productos
-      }
-    }
-  });
-
-  // Ocultar todas las listas de productos al inicio
-  document.querySelectorAll(".product-list").forEach((list) => {
-    if (list.style.display !== "flex") {
-      list.style.display = "none"; // Asegúrate de que las demás estén ocultas
-    }
-  });
-});
-
 let cart = JSON.parse(localStorage.getItem("cart")) || [];
 // Función para añadir productos al carrito
 function addToCart(name, price) {
@@ -136,3 +100,37 @@ function removeFromCart(index) {
   loadCart();
   updateTooltip();
 }
+
+document.addEventListener("DOMContentLoaded", function () {
+  const toggleButtons = document.querySelectorAll(".toggle-button");
+
+  toggleButtons.forEach((button, index) => {
+    button.addEventListener("click", function () {
+      const productList = this.nextElementSibling;
+
+      if (productList) {
+        if (
+          productList.style.display === "none" ||
+          productList.style.display === ""
+        ) {
+          productList.style.display = "flex";
+        } else {
+          productList.style.display = "none";
+        }
+      }
+    });
+
+    if (index === 0) {
+      const firstProductList = button.nextElementSibling;
+      if (firstProductList) {
+        firstProductList.style.display = "flex";
+      }
+    }
+  });
+
+  document.querySelectorAll(".product-list").forEach((list) => {
+    if (list.style.display !== "flex") {
+      list.style.display = "none";
+    }
+  });
+});
