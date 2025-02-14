@@ -45,14 +45,14 @@
 </head>
 <body>
     <header>
-        <h1>Producte a editar</h1>
+        <h1>Canviar producte</h1>
         <div>
             <a href="index.php">Pàgina principal</a>
         </div>
     </header>
 
     <div class="container">
-        <h1>Canviar producte</h1>
+        <h1>Producte a editar</h1>
         <form class="form-container" action="edit_product.php" method="POST">
             <div class="form-group">
                 <label for="name">Nom del producte</label>

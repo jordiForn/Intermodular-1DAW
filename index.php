@@ -86,7 +86,7 @@ if ($result->num_rows > 0) {
         <ul>
             <li><a href="new_product.php">Afegir un producte</a></li>
             <li><a href="edit_product.php">Canviar un producte</a></li>
-            <li><a href="#">Eliminar un producte</a></li>
+            <li><a href="delete_product.php">Eliminar un producte</a></li>
         </ul>
     </nav>
 
