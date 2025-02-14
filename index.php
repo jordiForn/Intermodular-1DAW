@@ -84,7 +84,7 @@ if ($result->num_rows > 0) {
 
     <nav id="admin-menu" style="display: none;">
         <ul>
-            <li><a href="#">Agregar un producte</a></li>
+            <li><a href="new_product.php">Afegir un producte</a></li>
             <li><a href="#">Canviar un producte</a></li>
             <li><a href="#">Eliminar un producte</a></li>
         </ul>
