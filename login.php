@@ -1,6 +1,30 @@
 <?php 
     include 'config.php';
     session_start();
+
+    if ($_SERVER["REQUEST_METHOD"] == "POST") {
+        $username = $_POST['username'];
+        $password = $_POST['password'];
+
+        $sql = $conn->prepare("SELECT * FROM client WHERE nombre_login = ? AND contrasena = ?");
+        $sql->bind_param("ss", $username, $password);
+        $sql->execute();
+        $result = $sql->get_result();
+        
+        if($result->num_rows > 0){
+            $user = $result->fetch_assoc();
+            session_regenerate_id(true);
+            $_SESSION['username'] = $user['nombre_login'];
+            $_SESSION['email'] = $user['email'];
+            $_SESSION['tlf'] = $user['tlf'];
+            $_SESSION['rol'] = $user['rol']; 
+            header("Location: index.php");
+        }else{
+            echo "Nom d'usuari o contrasenya incorrectes.";
+        }
+
+        $conn->close();
+    }
 ?>
 <!DOCTYPE html>
 <html lang="ca">
@@ -36,24 +60,6 @@
         </form>
         <p>Encara no tens un compte? <a href="signup.php">Registra't aquí</a></p>
     </div>
-    <?php
-    if ($_SERVER["REQUEST_METHOD"] == "POST") {
-        $username = $_POST['username'];
-        $password = $_POST['password'];
-
-        $sql = "SELECT * FROM client WHERE nombre_login = '$username' AND contrasena = '$password'";
-        $result = $conn->query($sql);
-        
-        if($result->num_rows > 0){
-            $_SESSION['username'] = $username;
-            header("Location: index.php");
-        }else{
-            echo "Nom d'usuari o contrasenya incorrectes.";
-        }
-
-        $conn->close();
-    }
-    ?>
     <script src="login.js"></script>
 </body>
 
