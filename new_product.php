@@ -2,7 +2,7 @@
 include 'config.php';
 session_start();
 
-if ($_SERVER['REQUEST_METHOD'] == 'POST'){
+if ($_SERVER['REQUEST_METHOD'] === 'POST'){
     $name = $_POST['name'];
     $text = $_POST['text'];
     $price = $_POST['price'];
@@ -27,14 +27,32 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST'){
         $category = $newCategoryName;
     }
 
-    $sql = $conn->prepare("INSERT INTO productes (nom, descripcio, preu, estoc, categoria) VALUES (?, ?, ?, ?, ?)");
-    $sql->bind_param("ssdss", $name, $text, $price, $stock, $category);
+    $sql = $conn->prepare(
+        "INSERT INTO productes (nom, descripcio, preu, estoc, categoria) 
+        VALUES (?, ?, ?, ?, ?)");
+
+    $sql->bind_param("ssdis", $name, $text, $price, $stock, $category);
 
     if ($sql->execute()) {
-        echo "Nou producte creat amb èxit";
+        echo "<script>alert('Nou producte creat amb èxit');</script>";
     } else {
-        echo "Error: " . $sql->error;
+        echo "<script>alert('Error: ' . $sql->error);</script>";
     }
+}
+
+$sql = "SELECT DISTINCT categoria FROM productes";
+
+$result = $conn->query($sql);
+
+$categories = [];
+
+if ($result->num_rows > 0) {
+    while ($row = $result->fetch_assoc()) {
+        $categoria = $row["categoria"];
+        $categories[] = $categoria;
+    }
+} else {
+    echo "<script>alert('No hi ha categories disponibles.');</script>";
 }
 
 ?>
@@ -61,7 +79,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST'){
     <title>Nou producte</title>
 </head>
 <body>
-<header>
+    <header>
         <h1>Afegir producte</h1>
         <div>
             <a href="index.php">Pàgina principal</a>
@@ -77,7 +95,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST'){
             </div>
             <div class="form-group">
                 <label for="text">Descripció</label>
-                <input type="text" id="text" name="text" required>
+                <input type="text" id="description" name="description" default="null">
             </div>
             <div class="form-group">
                 <label for="price">Preu</label>
@@ -90,10 +108,14 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST'){
             <div class="form-group">
                 <label for="category">Categoria</label>
                 <select id="category" name="category">
-                    <option value="Plantes i llavors">Plantes i llavors</option>
-                    <option value="Terra i adobs">Terra i adobs</option>
-                    <option value="Ferramentes">Ferramentes</option>
+                    <?php foreach ($categories as $categoria): ?>
+                        <option value="<?= htmlspecialchars($categoria) ?>"><?= htmlspecialchars($categoria) ?></option>
+                    <?php endforeach; ?>
                 </select>
+            </div>
+            <div class="form-group">
+                <label for="image">Imatge</label>
+                <input type="text" id="image" name="image" default="null">
             </div>
             <div class="form-group">
             <button type="button" id="NewCategoryButton" style="display: block;" onclick="toggleNewCategory()">Nova categoria</button>
