@@ -60,7 +60,6 @@
         </form>
         <p>Encara no tens un compte? <a href="signup.php">Registra't aquí</a></p>
     </div>
-    <script src="login.js"></script>
 </body>
 
 </html>
