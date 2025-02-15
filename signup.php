@@ -61,7 +61,7 @@
         $tlf = $_POST['tlf'];
         $password = $_POST['password'];
 
-        $sql = "INSERT INTO client (nom, cognom, email, tlf, nombre_login, contrasena) 
+        $sql = "INSERT INTO client (nom, cognom, email, tlf, nom_login, contrasena) 
                 VALUES ('$name', '$surname', '$email', '$tlf', '$username', '$password')";
 
         if ($conn->query($sql) === TRUE) {

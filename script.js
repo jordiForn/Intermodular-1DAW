@@ -75,36 +75,19 @@ function removeFromCart(index) {
   updateTooltip();
 }
 
-document.addEventListener("DOMContentLoaded", function () {
-  const toggleButtons = document.querySelectorAll(".toggle-button");
+document.addEventListener("DOMContentLoaded", () => {
+  const productLists = document.querySelectorAll(".product-list");
 
-  toggleButtons.forEach((button, index) => {
-    button.addEventListener("click", function () {
-      const productList = this.nextElementSibling;
+  productLists.forEach(
+    (list, index) => (list.style.display = index === 0 ? "flex" : "none")
+  );
 
-      if (productList) {
-        if (
-          productList.style.display === "none" ||
-          productList.style.display === ""
-        ) {
-          productList.style.display = "flex";
-        } else {
-          productList.style.display = "none";
-        }
-      }
+  document.querySelectorAll(".toggle-button").forEach((button, index) => {
+    button.addEventListener("click", () => {
+      const productList = button.nextElementSibling;
+      if (productList)
+        productList.style.display =
+          productList.style.display === "flex" ? "none" : "flex";
     });
-
-    if (index === 0) {
-      const firstProductList = button.nextElementSibling;
-      if (firstProductList) {
-        firstProductList.style.display = "flex";
-      }
-    }
-  });
-
-  document.querySelectorAll(".product-list").forEach((list) => {
-    if (list.style.display !== "flex") {
-      list.style.display = "none";
-    }
   });
 });

@@ -6,7 +6,7 @@
         $username = $_POST['username'];
         $password = $_POST['password'];
 
-        $sql = $conn->prepare("SELECT * FROM client WHERE nombre_login = ? AND contrasena = ?");
+        $sql = $conn->prepare("SELECT * FROM client WHERE nom_login = ? AND contrasena = ?");
         $sql->bind_param("ss", $username, $password);
         $sql->execute();
         $result = $sql->get_result();
@@ -14,7 +14,7 @@
         if($result->num_rows > 0){
             $user = $result->fetch_assoc();
             session_regenerate_id(true);
-            $_SESSION['username'] = $user['nombre_login'];
+            $_SESSION['username'] = $user['nom_login'];
             $_SESSION['email'] = $user['email'];
             $_SESSION['tlf'] = $user['tlf'];
             $_SESSION['rol'] = $user['rol']; 

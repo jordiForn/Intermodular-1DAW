@@ -2,7 +2,7 @@
     include 'config.php';
     session_start();
 
-    $sql = "SELECT id FROM client WHERE nombre_login = '$username'";
+    $sql = "SELECT id FROM client WHERE nom_login = '$username'";
     $result = $conn->query($sql);
 
     if($result->num_rows > 0){
