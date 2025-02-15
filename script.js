@@ -16,7 +16,7 @@ function addToCart(name, price) {
 }
 
 document.addEventListener("DOMContentLoaded", () => {
-  if (window.location.pathname.includes("cart")) {
+  if (window.location.pathname.includes("cart.html")) {
     loadCart();
   }
 

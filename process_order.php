@@ -1,6 +1,6 @@
 <?php
-    include 'config.php';
-    session_start();
+    include 'connection.php';
+    include 'usrData.php';
 
     $sql = "SELECT id FROM client WHERE nom_login = '$username'";
     $result = $conn->query($sql);
@@ -17,7 +17,7 @@
         $total = $_POST['cart_total'];
         $date = date('Y-m-d H:i:s');
     
-        $sql = $conn->prepare('INSERT INTO comandes (id_client, data_comanda, direccio_enviament, total) VALUES (?, ?, ?, ?)');
+        $sql = $conn->prepare('INSERT INTO comandes (client_id , data_comanda, direccio_enviament, total) VALUES (?, ?, ?, ?)');
         $sql->bind_param('issd', $id, $date, $address, $total);
     
         if ($sql->execute()) {

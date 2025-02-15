@@ -1,5 +1,5 @@
 <?php
-include 'config.php';
+include 'connection.php';
 session_start();
 
 $isAdmin = false;

@@ -1,10 +1,10 @@
 <?php
 $servername = "localhost";
-$username = "root";
+$DBusername = "root";
 $password= "";
 $dbname = "jardineria";
 
-$conn = new mysqli($servername, $username, $password, $dbname);
+$conn = new mysqli($servername, $DBusername, $password, $dbname);
 
 if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
