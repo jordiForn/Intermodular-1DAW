@@ -11,8 +11,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Formulari de Compra</title>
     <link rel="stylesheet" href="styles.css">
+    <script src="script.js" defer></script>
+    <title>Formulari de Compra</title>
+    
 </head>
 
 <body class="form-page">
@@ -50,7 +52,7 @@
 
         </div>
     </div>
-    <script src="script.js"></script>
+    
 </body>
 
 </html>

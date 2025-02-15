@@ -15,8 +15,9 @@ if(isset($_SESSION['username'])){
         $rol = $result->fetch_assoc()['rol'];
 
         if($rol === '1'){
-            $isAdmin = true;
             $isLoggedIn = true;
+            $isAdmin = true;
+            
         }else{
             $isLoggedIn = true;
         }
@@ -61,6 +62,8 @@ if ($result->num_rows > 0) {
     <script>
         let isAdmin = <?php echo json_encode($isAdmin); ?>;
         let isLoggedIn = <?php echo json_encode($isLoggedIn); ?>;
+        console.log("isAdmin:", isAdmin);
+        console.log("isLoggedIn:", isLoggedIn);
     </script>
     <script src="script.js" defer></script>
     <script src="visibility.js" defer></script>
@@ -73,7 +76,7 @@ if ($result->num_rows > 0) {
         <h1>Tenda de Jardineria</h1>
         <div>
             <a href="#"><i class="fas fa-search"></i></a>
-            <a href="#" id="contact-icon"><i class="fas fa-envelope"></i></a>
+            <a href="contact.php" id="contact-icon"><i class="fas fa-envelope"></i></a>
             <a href="login.php"><i class="fas fa-user"></i></a>
             <a href="cart.html"><i class="fas fa-shopping-cart"></i></a>
             <a href="logout.php" id="logout-link" style="display: none;"><i class="fas fa-sign-out-alt"></i></a>
