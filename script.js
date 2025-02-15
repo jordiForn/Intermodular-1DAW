@@ -70,6 +70,15 @@ function setupCartListeners() {
   });
 }
 
+function getTotal() {
+  const hiddenTotalInput = document.getElementById("cart-total-hidden");
+  let total = 0;
+  cart.forEach((item) => {
+    total += item.price * item.quantity;
+  });
+  hiddenTotalInput.value = total.toFixed(2);
+}
+
 function updateTooltip() {
   let totalItems = 0;
   let totalPrice = 0;

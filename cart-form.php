@@ -43,9 +43,9 @@
                 <textarea id="notes" name="notes"></textarea>
 
                 <input type="hidden" id="cart-data" name="cart_data">
-                <input type="hidden" id="cart-total" name="cart_total">
+                <input type="hidden" id="cart-total-hidden" name="cart_total" value="">
 
-                <button type="submit">Confirmar compra</button>
+                <button type="submit" onclick="getTotal()">Confirmar compra</button>
             </form>
 
         </div>
