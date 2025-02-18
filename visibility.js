@@ -2,6 +2,7 @@ if (window.location.pathname.includes("index.php")) {
   document.addEventListener("DOMContentLoaded", function () {
     const menuIcon = document.getElementById("menu-icon");
     const adminMenu = document.getElementById("admin-menu");
+    const searchIcon = document.getElementById("search-icon");
 
     if (isLoggedIn) {
       document.getElementById("logout-link").style.display = "inline-block";
@@ -16,6 +17,14 @@ if (window.location.pathname.includes("index.php")) {
         adminMenu.style.display = "block";
       } else {
         adminMenu.style.display = "none";
+      }
+    });
+
+    searchIcon.addEventListener("click", function () {
+      if (document.getElementById("search-input").style.display === "none") {
+        document.getElementById("search-input").style.display = "block";
+      } else {
+        document.getElementById("search-input").style.display = "none";
       }
     });
   });

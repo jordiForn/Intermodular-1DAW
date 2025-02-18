@@ -49,7 +49,8 @@ if ($result->num_rows > 0) {
     <header>
         <h1>Tenda de Jardineria</h1>
         <div>
-            <a href="#"><i class="fas fa-search"></i></a>
+            <a href="#" id="search-icon"><i class="fas fa-search"></i></a>
+            <input type="text" id="search-input" placeholder="Buscar productes..." style="display: none;">
             <a href="contact.php" id="contact-icon"><i class="fas fa-envelope"></i></a>
             <a href="login.php"><i class="fas fa-user"></i></a>
             <a href="cart.html"><i class="fas fa-shopping-cart"></i></a>

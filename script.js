@@ -108,3 +108,21 @@ function removeFromCart(index) {
   loadCart();
   updateTooltip();
 }
+
+document.addEventListener("DOMContentLoaded", function () {
+  let searchInput = document.getElementById("search-input");
+  let productCards = document.querySelectorAll(".product-card");
+
+  searchInput.addEventListener("input", function () {
+    let searchTerm = searchInput.value.toLowerCase();
+
+    productCards.forEach(function (card) {
+      let productName = card.querySelector("h3").innerText.toLowerCase();
+      if (productName.includes(searchTerm)) {
+        card.style.display = "block";
+      } else {
+        card.style.display = "none";
+      }
+    });
+  });
+});
