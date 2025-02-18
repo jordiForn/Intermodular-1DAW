@@ -26,14 +26,14 @@
         $sql1 = $conn->prepare('UPDATE client SET missatge = ? WHERE nom_login = ?');
         $sql1->bind_param('ss', $notes, $username);
 
-        if ($sql->execute() || $sql1->execute()) {
+        if ($sql->execute() && $sql1->execute()) {
             echo "<script>
                     alert('Comanda processada amb èxit');
                     window.location.href = 'index.php';
                 </script>";
-
         } else {
-            echo "Error: " . $sql->error;
+            echo "Error en la inserción de la comanda: " . $sql->error . "<br>";
+            echo "Error en la actualización del missatge: " . $sql1->error;
         }
     }
     ?>

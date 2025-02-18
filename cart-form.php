@@ -1,8 +1,6 @@
 <?php
     include 'connection.php';
     include 'usrData.php';
-
-    
 ?>
 
 <!DOCTYPE html>
