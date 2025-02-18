@@ -22,4 +22,14 @@ if (window.location.pathname.includes("index.php")) {
 }
 
 if (window.location.pathname.includes("contact.php")) {
+  document.addEventListener("DOMContentLoaded", function () {
+    if (!isLoggedIn) {
+      document.getElementById("name-label").style.display = "inline-block";
+      document.getElementById("name").style.display = "inline-block";
+      document.getElementById("email-label").style.display = "inline-block";
+      document.getElementById("email").style.display = "inline-block";
+      document.getElementById("phone-label").style.display = "inline-block";
+      document.getElementById("phone").style.display = "inline-block";
+    }
+  });
 }
