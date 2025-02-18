@@ -60,6 +60,47 @@ header {
     cursor: default;
   }
 
+  #admin-menu {
+    display: none;
+    background-color: $color-bg;
+    padding: 10px;
+    border-radius: 5px;
+    position: absolute;
+    top: 120px;
+    right: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    opacity: 0;
+    transform: translateY(-10px);
+    transition: opacity 0.3s ease, transform 0.3s ease;
+
+    ul {
+      list-style-type: none;
+      padding: 0;
+      margin: 0;
+    }
+
+    li {
+      margin: 10px 0;
+
+      a {
+        text-decoration: none;
+        color: $color-text;
+        font-weight: bold;
+      }
+
+      a:hover {
+        color: $color-primary;
+      }
+    }
+
+    &.visible {
+      display: block;
+      opacity: 1;
+      transform: translateY(0);
+      border: 1px solid $color-secondary;
+    }
+  }
+
   div {
     display: flex;
     gap: 30px;
