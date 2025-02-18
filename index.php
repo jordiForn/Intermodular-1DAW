@@ -1,27 +1,7 @@
 <?php
 include 'connection.php';
-session_start();
+include 'logged.php';
 
-$isAdmin = false;
-$isLoggedIn = false;
-
-if(isset($_SESSION['username'])){
-    $username = $_SESSION['username'];
-    
-    $sql = "SELECT rol FROM client WHERE nom_login = '$username'";
-    $result = $conn->query($sql);
-
-    if($result->num_rows > 0){
-        $rol = $result->fetch_assoc()['rol'];
-
-        if($rol === '1'){
-            $isAdmin = true;
-            $isLoggedIn = true;
-        }else{
-            $isLoggedIn = true;
-        }
-    }
-}
 
 $sql = "SELECT * FROM productes 
 WHERE estoc > 0
@@ -58,10 +38,7 @@ if ($result->num_rows > 0) {
     <title>Tenda de Jardineria</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
     <link rel="stylesheet" href="styles.css?v<?php echo time(); ?>">
-    <script>
-        let isAdmin = <?php echo json_encode($isAdmin); ?>;
-        let isLoggedIn = <?php echo json_encode($isLoggedIn); ?>;
-    </script>
+
     <script src="script.js" defer></script>
     <script src="visibility.js" defer></script>
     
@@ -73,7 +50,7 @@ if ($result->num_rows > 0) {
         <h1>Tenda de Jardineria</h1>
         <div>
             <a href="#"><i class="fas fa-search"></i></a>
-            <a href="#" id="contact-icon"><i class="fas fa-envelope"></i></a>
+            <a href="contact.php" id="contact-icon"><i class="fas fa-envelope"></i></a>
             <a href="login.php"><i class="fas fa-user"></i></a>
             <a href="cart.html"><i class="fas fa-shopping-cart"></i></a>
             <a href="logout.php" id="logout-link" style="display: none;"><i class="fas fa-sign-out-alt"></i></a>
