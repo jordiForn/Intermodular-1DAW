@@ -1,3 +1,8 @@
+<?php
+    include 'connection.php';
+    include 'usrData.php';
+?>
+
 <!DOCTYPE html>
 <html lang="ca" class="form-page">
 

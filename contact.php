@@ -9,23 +9,20 @@
         $phone = $_POST['phone'];
         $notes = $_POST['notes'];
         
-        $sql = "SELECT id, missatge FROM client WHERE nom_login = '$username'";
+        $sql = "SELECT id, consulta FROM client WHERE nom_login = '$username'";
         $result = $conn->query($sql);
 
         if($result->num_rows > 0){
             $user = $result->fetch_assoc();
             $id = $user['id'];
-            $currentNotes = $user['missatge'];
+            $currentNotes = $user['consulta'];
         }else{
             echo "Error: " . $sql . "<br>" . $conn->error;
         }
 
         $notes = $currentNotes . '| ' . $notes;
-        $sql1 = $conn->prepare('UPDATE client SET missatge = ? WHERE nom_login = ?');
-        $sql1->bind_param('ss', $notes, $username);
-
-        $sql = $conn->prepare('INSERT INTO contactes (nom, email, tel, notes) VALUES (?, ?, ?, ?)');
-        $sql->bind_param('ssss', $name, $email, $phone, $notes);
+        $sql = $conn->prepare('UPDATE client SET consulta = ? WHERE nom_login = ?');
+        $sql->bind_param('ss', $notes, $username);
         
         if($sql->execute()){
             echo "<script>
@@ -57,7 +54,7 @@
 
     <div class="container">
         <div class="form-container">
-            <form id="purchase-form" action="contact.php" method="POST">
+            <form id="contact-form" action="contact.php" method="POST">
                 <label for="name" id="name-label" style="display: none;">Nom:</label>
                 <input type="text" id="name" name="name" required value="<?php echo htmlspecialchars($username); ?>" style="display: none;">
 
@@ -70,7 +67,7 @@
                 <label for="notes">Missatge:</label>
                 <textarea id="notes" name="notes" value="null" required></textarea>
 
-                <button type="submit">Confirmar compra</button>
+                <button type="submit">Enviar missatge</button>
             </form>
 
         </div>
