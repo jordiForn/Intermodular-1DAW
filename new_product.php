@@ -1,10 +1,10 @@
 <?php
-include 'config.php';
+include 'connection.php';
 session_start();
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST'){
     $name = $_POST['name'];
-    $text = $_POST['text'];
+    $text = $_POST['description'];
     $price = $_POST['price'];
     $stock = $_POST['stock'];
     $category = $_POST['category'];

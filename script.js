@@ -1,4 +1,5 @@
 let cart = JSON.parse(localStorage.getItem("cart")) || [];
+updateTooltip();
 function addToCart(name, price) {
   let existingItem = cart.find((item) => item.name === name);
 
@@ -9,13 +10,37 @@ function addToCart(name, price) {
   }
 
   localStorage.setItem("cart", JSON.stringify(cart));
-  loadCart();
+
   updateTooltip();
   alert(name + " s'ha afegit al carret.");
 }
 
-document.addEventListener("DOMContentLoaded", loadCart);
+document.addEventListener("DOMContentLoaded", () => {
+  if (window.location.pathname.includes("cart.html")) {
+    loadCart();
+  }
+
+  const productLists = document.querySelectorAll(".product-list");
+  productLists.forEach(
+    (list, index) => (list.style.display = index === 0 ? "flex" : "none")
+  );
+});
+
+document.addEventListener("DOMContentLoaded", () => {
+  document.querySelectorAll(".toggle-button").forEach((button) => {
+    button.addEventListener("click", () => {
+      const productList = button.nextElementSibling;
+      if (productList)
+        productList.style.display =
+          productList.style.display === "flex" ? "none" : "flex";
+    });
+  });
+});
+
 function loadCart() {
+  const cartContainer = document.getElementById("cart-items");
+  const totalElement = document.getElementById("cart-total");
+
   cart = JSON.parse(localStorage.getItem("cart")) || [];
   cartContainer.innerHTML = "";
   let total = 0;
@@ -25,16 +50,15 @@ function loadCart() {
     let itemElement = document.createElement("div");
     itemElement.classList.add("cart-item");
     itemElement.innerHTML = `
-        <span>${item.name} (x${item.quantity})</span>
-        <span>${(item.price * item.quantity).toFixed(2)}€</span>
-        <button class="remove-btn" data-index="${index}">X</button>
+      <span>${item.name} (x${item.quantity})</span>
+      <span>${(item.price * item.quantity).toFixed(2)}€</span>
+      <button class="remove-btn" data-index="${index}">X</button>
     `;
     cartContainer.appendChild(itemElement);
   });
 
   totalElement.innerText = total.toFixed(2) + "€";
   setupCartListeners();
-  updateTooltip();
 }
 
 function setupCartListeners() {
@@ -44,6 +68,15 @@ function setupCartListeners() {
       removeFromCart(index);
     });
   });
+}
+
+function getTotal() {
+  const hiddenTotalInput = document.getElementById("cart-total-hidden");
+  let total = 0;
+  cart.forEach((item) => {
+    total += item.price * item.quantity;
+  });
+  hiddenTotalInput.value = total.toFixed(2);
 }
 
 function updateTooltip() {
@@ -57,6 +90,7 @@ function updateTooltip() {
 
   const formattedPrice = totalPrice.toFixed(2).replace(".", ",");
 
+  const tooltips = document.querySelectorAll(".tooltip-text");
   tooltips.forEach((tooltip) => {
     tooltip.innerText = `${totalItems} ítems - ${formattedPrice}€`;
   });
@@ -74,37 +108,3 @@ function removeFromCart(index) {
   loadCart();
   updateTooltip();
 }
-
-document.addEventListener("DOMContentLoaded", function () {
-  const toggleButtons = document.querySelectorAll(".toggle-button");
-
-  toggleButtons.forEach((button, index) => {
-    button.addEventListener("click", function () {
-      const productList = this.nextElementSibling;
-
-      if (productList) {
-        if (
-          productList.style.display === "none" ||
-          productList.style.display === ""
-        ) {
-          productList.style.display = "flex";
-        } else {
-          productList.style.display = "none";
-        }
-      }
-    });
-
-    if (index === 0) {
-      const firstProductList = button.nextElementSibling;
-      if (firstProductList) {
-        firstProductList.style.display = "flex";
-      }
-    }
-  });
-
-  document.querySelectorAll(".product-list").forEach((list) => {
-    if (list.style.display !== "flex") {
-      list.style.display = "none";
-    }
-  });
-});

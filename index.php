@@ -1,5 +1,5 @@
 <?php
-include 'config.php';
+include 'connection.php';
 session_start();
 
 $isAdmin = false;
@@ -8,7 +8,7 @@ $isLoggedIn = false;
 if(isset($_SESSION['username'])){
     $username = $_SESSION['username'];
     
-    $sql = "SELECT rol FROM client WHERE nombre_login = '$username'";
+    $sql = "SELECT rol FROM client WHERE nom_login = '$username'";
     $result = $conn->query($sql);
 
     if($result->num_rows > 0){
