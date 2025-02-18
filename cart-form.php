@@ -11,8 +11,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Formulari de Compra</title>
     <link rel="stylesheet" href="styles.css">
+    <script src="script.js" defer></script>
+    <title>Formulari de Compra</title>
+    
 </head>
 
 <body class="form-page">
@@ -40,7 +42,7 @@
                 <input type="tel" id="phone" name="phone" required value="<?php echo htmlspecialchars($phone); ?>">
 
                 <label for="notes">Notes adicionals (opcional):</label>
-                <textarea id="notes" name="notes"></textarea>
+                <textarea id="notes" name="notes" value="null"></textarea>
 
                 <input type="hidden" id="cart-data" name="cart_data">
                 <input type="hidden" id="cart-total-hidden" name="cart_total" value="">
@@ -50,7 +52,7 @@
 
         </div>
     </div>
-    <script src="script.js"></script>
+    
 </body>
 
 </html>
