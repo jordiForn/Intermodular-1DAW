@@ -37,6 +37,41 @@ header h1 {
 header h1:hover {
   cursor: default;
 }
+header #admin-menu {
+  display: none;
+  background-color: #f9eccc;
+  padding: 10px;
+  border-radius: 5px;
+  position: absolute;
+  top: 120px;
+  right: 20px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  opacity: 0;
+  transform: translateY(-10px);
+  transition: opacity 0.3s ease, transform 0.3s ease;
+}
+header #admin-menu ul {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+}
+header #admin-menu li {
+  margin: 10px 0;
+}
+header #admin-menu li a {
+  text-decoration: none;
+  color: #587d71;
+  font-weight: bold;
+}
+header #admin-menu li a:hover {
+  color: #4daa57;
+}
+header #admin-menu.visible {
+  display: block;
+  opacity: 1;
+  transform: translateY(0);
+  border: 1px solid #4daa57;
+}
 header div {
   display: flex;
   gap: 30px;
@@ -112,6 +147,30 @@ header div a:hover {
   margin-bottom: 10px;
   padding: 10px;
   background: #f9eccc;
+}
+
+#admin-menu {
+  display: none;
+  background-color: #f9eccc;
+  padding: 10px;
+  border-radius: 5px;
+  position: absolute;
+  top: 100px;
+  right: 20px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+#admin-menu ul {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+}
+#admin-menu ul li {
+  margin: 10px 0;
+}
+#admin-menu ul li a {
+  text-decoration: none;
+  color: #587d71;
+  font-weight: bold;
 }
 
 .toggle-button {
@@ -260,4 +319,6 @@ button:hover {
   border-radius: 10px;
   margin: 20px auto;
   max-width: 500px;
-}/*# sourceMappingURL=styles.css.map */
+}
+
+/*# sourceMappingURL=styles.css.map */
