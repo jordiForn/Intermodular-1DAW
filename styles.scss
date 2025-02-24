@@ -220,6 +220,14 @@ header {
   }
 }
 
+.cart {
+  a:hover {
+    color: inherit;
+    background-color: inherit;
+    border: none;
+  }
+}
+
 .toggle-button {
   width: 100%;
   @include button-style($color-primary, $color-secondary);
