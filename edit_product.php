@@ -49,15 +49,28 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['category'])) {
             document.getElementById('edit-estoc').value = estoc;
 
             const productCards = document.querySelectorAll('.product-card');
-productCards.forEach(card => {
-    const cardId = card.querySelector('.edit-icon').getAttribute('onclick').match(/'(\d+)'/)[1];
-    if (cardId === id) {
-        card.style.display = 'block';
-        card.setAttribute('id', 'editing-product');
-    } else {
-        card.style.display = 'none';
-    }
-});
+            productCards.forEach(card => {
+                const cardId = card.getAttribute('data-id');
+                if (cardId === id) {
+                    card.style.display = 'block';
+                    card.setAttribute('id', 'editing-product');
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+
+            document.getElementById('edit-nom').addEventListener('input', function() {
+                document.querySelector('#editing-product h3').innerText = this.value;
+            });
+            document.getElementById('edit-descripcio').addEventListener('input', function() {
+                document.querySelector('#editing-product p.description').innerText = this.value;
+            });
+            document.getElementById('edit-preu').addEventListener('input', function() {
+                document.querySelector('#editing-product p.price').innerText = parseFloat(this.value).toFixed(2) + '€';
+            });
+            document.getElementById('edit-estoc').addEventListener('input', function() {
+                document.querySelector('#editing-product p.stock').innerText = 'Estoc disponible: ' + this.value;
+            });
         }
 
         function deleteProduct(id) {
@@ -73,6 +86,19 @@ productCards.forEach(card => {
                     location.reload();
                 });
             }
+        }
+
+        function save(){
+            fetch('update_product.php', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+                body: 'id=' + document.getElementById('edit-id').value + '&nom=' + document.getElementById('edit-nom').value + '&descripcio=' + document.getElementById('edit-descripcio').value + '&preu=' + document.getElementById('edit-preu').value + '&estoc=' + document.getElementById('edit-estoc').value
+            })
+            .then(response => response.text())
+            .then(data => {
+                alert(data);
+                location.reload();
+            });
         }
     </script>
 </head>
@@ -98,7 +124,7 @@ productCards.forEach(card => {
         <?php if (!empty($products)): ?>
             <div class="product-list" style="display: flex; justify-content: space-around;">
                 <?php foreach ($products as $producte): ?>
-                    <div class="product-card">
+                    <div class="product-card" data-id="<?= $producte['id'] ?>">
                         <img src="images/<?= htmlspecialchars($producte['imatge']) ?>" alt="<?= htmlspecialchars($producte['nom']) ?>">
                         <h3><?= htmlspecialchars($producte['nom']) ?></h3>
                         <p class="description"><?= htmlspecialchars($producte['descripcio']) ?></p>
@@ -130,7 +156,7 @@ productCards.forEach(card => {
             <input type="number" id="edit-preu" name="preu" step="0.01" required>
             <label for="edit-estoc">Estoc:</label>
             <input type="number" id="edit-estoc" name="estoc" required>
-            <button type="submit" name="edit_product">Guardar canvis</button>
+            <button type="submit" name="edit_product" onclick="save()">Guardar canvis</button>
         </form>
     </div>
 </body>
