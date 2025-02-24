@@ -15,7 +15,7 @@ if ($result->num_rows > 0) {
     echo "No hi ha categories disponibles.";
 }
 
-$products = []; // Inicializa $products como un array vacío
+$products = [];
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['category'])) {
     $category = $_POST['category'];
@@ -63,10 +63,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['edit_product'])) {
             document.getElementById('edit-preu').value = preu;
             document.getElementById('edit-estoc').value = estoc;
 
-            // Mostrar la tarjeta del producto que se está editando
             const productCards = document.querySelectorAll('.product-card');
             productCards.forEach(card => {
-                if (card.querySelector('.edit-icon').getAttribute('onclick').includes(id)) {
+                const cardId = card.querySelector('.edit-icon').getAttribute('onclick').match(/'(\d+)'/)[1];
+                if (cardId === id) {
                     card.style.display = 'block';
                     card.setAttribute('id', 'editing-product');
                 } else {
@@ -74,7 +74,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['edit_product'])) {
                 }
             });
 
-            // Añadir eventos de entrada para actualizar la previsualización en tiempo real
             document.getElementById('edit-nom').addEventListener('input', function() {
                 document.querySelector('#editing-product h3').innerText = this.value;
             });
