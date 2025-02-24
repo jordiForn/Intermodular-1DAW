@@ -64,7 +64,6 @@ if ($result->num_rows > 0) {
         <ul>
             <li><a href="new_product.php">Afegir un producte</a></li>
             <li><a href="edit_product.php">Canviar un producte</a></li>
-            <li><a href="delete_product.php">Eliminar un producte</a></li>
         </ul>
     </nav>
 
@@ -97,7 +96,6 @@ if ($result->num_rows > 0) {
     </div>
     
     <div class="container">
-    <!-- Sección de Serveis per a Jardins -->
     <div class="service-category" id="service-category">
         <button class="toggle-button">🏡 Serveis per a jardins</button>
         <div class="service-garden">
@@ -122,7 +120,6 @@ if ($result->num_rows > 0) {
         </div>
     </div>
 
-    <!-- Sección de Serveis per a Piscines -->
     <div class="service-category" id="service-category">
         <button class="toggle-button">🏊 Serveis per a piscines</button>
         <div class="service-pool">
