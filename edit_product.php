@@ -4,7 +4,6 @@ session_start();
 
 $sql = "SELECT DISTINCT categoria FROM productes";
 $result = $conn->query($sql);
-
 $categories = [];
 
 if ($result->num_rows > 0) {
@@ -30,22 +29,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['category'])) {
         echo "No hi ha productes disponibles.";
     }
 }
-
-if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['edit_product'])) {
-    $id = $_POST['id'];
-    $nom = $_POST['nom'];
-    $descripcio = $_POST['descripcio'];
-    $preu = $_POST['preu'];
-    $estoc = $_POST['estoc'];
-
-    $sql = "UPDATE productes SET nom = '$nom', descripcio = '$descripcio', preu = '$preu', estoc = '$estoc' WHERE id = '$id'";
-    if ($conn->query($sql) === TRUE) {
-        echo "Producte actualitzat correctament.";
-    } else {
-        echo "Error actualitzant el producte: " . $conn->error;
-    }
-}
 ?>
+
 <!DOCTYPE html>
 <html lang="ca">
 <head>
@@ -64,37 +49,37 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['edit_product'])) {
             document.getElementById('edit-estoc').value = estoc;
 
             const productCards = document.querySelectorAll('.product-card');
-            productCards.forEach(card => {
-                const cardId = card.querySelector('.edit-icon').getAttribute('onclick').match(/'(\d+)'/)[1];
-                if (cardId === id) {
-                    card.style.display = 'block';
-                    card.setAttribute('id', 'editing-product');
-                } else {
-                    card.style.display = 'none';
-                }
-            });
+productCards.forEach(card => {
+    const cardId = card.querySelector('.edit-icon').getAttribute('onclick').match(/'(\d+)'/)[1];
+    if (cardId === id) {
+        card.style.display = 'block';
+        card.setAttribute('id', 'editing-product');
+    } else {
+        card.style.display = 'none';
+    }
+});
+        }
 
-            document.getElementById('edit-nom').addEventListener('input', function() {
-                document.querySelector('#editing-product h3').innerText = this.value;
-            });
-            document.getElementById('edit-descripcio').addEventListener('input', function() {
-                document.querySelector('#editing-product p.description').innerText = this.value;
-            });
-            document.getElementById('edit-preu').addEventListener('input', function() {
-                document.querySelector('#editing-product p.price').innerText = parseFloat(this.value).toFixed(2) + '€';
-            });
-            document.getElementById('edit-estoc').addEventListener('input', function() {
-                document.querySelector('#editing-product p.stock').innerText = 'Estoc disponible: ' + this.value;
-            });
+        function deleteProduct(id) {
+            if (confirm("Estàs segur que vols eliminar aquest producte?")) {
+                fetch('delete_product.php', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+                    body: 'id=' + id
+                })
+                .then(response => response.text())
+                .then(data => {
+                    alert(data);
+                    location.reload();
+                });
+            }
         }
     </script>
 </head>
 <body>
     <header>
         <h1>Canviar producte</h1>
-        <div>
-            <a href="index.php">Pàgina principal</a>
-        </div>
+        <div><a href="index.php">Pàgina principal</a></div>
     </header>
 
     <div class="container">
@@ -119,27 +104,34 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['edit_product'])) {
                         <p class="description"><?= htmlspecialchars($producte['descripcio']) ?></p>
                         <p class="price"><?= number_format($producte['preu'], 2, ",", ".") ?>€</p>
                         <p class="stock">Estoc disponible: <?= number_format($producte['estoc'], 0, ",", ".") ?></p>
-                        <a href="javascript:void(0);" onclick="editProduct('<?= $producte['id'] ?>', '<?= htmlspecialchars($producte['nom']) ?>', '<?= htmlspecialchars($producte['descripcio']) ?>', '<?= $producte['preu'] ?>', '<?= $producte['estoc'] ?>')" class="edit-icon"><i class="fas fa-pencil-alt"></i></a>
+
+                        <a href="javascript:void(0);" onclick="editProduct('<?= $producte['id'] ?>', '<?= htmlspecialchars($producte['nom']) ?>', '<?= htmlspecialchars($producte['descripcio']) ?>', '<?= $producte['preu'] ?>', '<?= $producte['estoc'] ?>')" class="edit-icon">
+                            <i class="fas fa-pencil-alt"></i>
+                        </a>
+
+                        <a href="javascript:void(0);" onclick="deleteProduct('<?= $producte['id'] ?>')" class="delete-icon">
+                            <i class="fas fa-trash" style="color: red;"></i>
+                        </a>
                     </div>
                 <?php endforeach; ?>
             </div>
         <?php endif; ?>
+    </div>
 
-        <div id="edit-form" style="display: none;">
-            <h2>Editar producte</h2>
-            <form action="edit_product.php" method="POST">
-                <input type="hidden" id="edit-id" name="id">
-                <label for="edit-nom">Nom:</label>
-                <input type="text" id="edit-nom" name="nom" required>
-                <label for="edit-descripcio">Descripció:</label>
-                <input type="text" id="edit-descripcio" name="descripcio" required>
-                <label for="edit-preu">Preu:</label>
-                <input type="number" id="edit-preu" name="preu" step="0.01" required>
-                <label for="edit-estoc">Estoc:</label>
-                <input type="number" id="edit-estoc" name="estoc" required>
-                <button type="submit" name="edit_product">Guardar canvis</button>
-            </form>
-        </div>
+    <div id="edit-form" style="display: none;">
+        <h2>Editar producte</h2>
+        <form action="update_product.php" method="POST">
+            <input type="hidden" id="edit-id" name="id">
+            <label for="edit-nom">Nom:</label>
+            <input type="text" id="edit-nom" name="nom" required>
+            <label for="edit-descripcio">Descripció:</label>
+            <input type="text" id="edit-descripcio" name="descripcio" required>
+            <label for="edit-preu">Preu:</label>
+            <input type="number" id="edit-preu" name="preu" step="0.01" required>
+            <label for="edit-estoc">Estoc:</label>
+            <input type="number" id="edit-estoc" name="estoc" required>
+            <button type="submit" name="edit_product">Guardar canvis</button>
+        </form>
     </div>
 </body>
 </html>

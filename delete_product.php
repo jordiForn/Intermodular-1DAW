@@ -1,49 +1,19 @@
 <?php
-    include 'connection.php';
-    session_start();
+include 'connection.php';
+session_start();
 
-    if ($_SERVER['REQUEST_METHOD'] === 'POST'){
-        $name = $_POST['name'];
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['id'])) {
+    $id = $_POST['id'];
+    $sql = "DELETE FROM productes WHERE id = ?";
+    $stmt = $conn->prepare($sql);
+    $stmt->bind_param("i", $id);
 
-        $sql = $conn->prepare(
-            "DELETE FROM productes WHERE nom = ?");
-    
-        $sql->bind_param("s", $name);
-    
-        if ($sql->execute()) {
-            echo "<script>alert('Producte esborrat amb èxit');</script>";
-        } else {
-            echo "<script>alert('Error: ' . $sql->error);</script>";
-        }
+    if ($stmt->execute()) {
+        echo "Producte eliminat correctament.";
+    } else {
+        echo "Error eliminant el producte: " . $conn->error;
     }
+    $stmt->close();
+    $conn->close();
+}
 ?>
-
-<!DOCTYPE html>
-<html lang="ca">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="styles.css">
-    <title>Esborrar un producte</title>
-</head>
-<body>
-
-<header>
-        <h1>Canviar producte</h1>
-        <div>
-            <a href="index.php">Pàgina principal</a>
-        </div>
-    </header>
-
-<div class="container">
-    <h1>Producte a esborrar</h1>
-    <form class="form-container" action="delete_product.php" method="POST">
-        <div class="form-group">
-            <label for="name">Nom del producte</label>
-            <input type="text" id="name" name="name" required>
-        </div>
-            
-        <button type="submit">Esborrar producte</button>
-    </form>
-</body>
-</html>
