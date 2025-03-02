@@ -64,6 +64,7 @@ if ($result->num_rows > 0) {
         <ul>
             <li><a href="new_product.php">Afegir un producte</a></li>
             <li><a href="edit_product.php">Canviar un producte</a></li>
+            <li><a href="edit_users.php">Editar usuaris</a></li>
         </ul>
     </nav>
 
@@ -71,7 +72,7 @@ if ($result->num_rows > 0) {
         <h2>Llista de Productes</h2>
         <a href="#service-category">
             Busques serveis?
-        </a>ñ
+        </a>
         <?php foreach ($categories as $categoria => $productes): ?>
         <div class="product-category">
             <button class="toggle-button"><?= htmlspecialchars($categoria) ?></button>
