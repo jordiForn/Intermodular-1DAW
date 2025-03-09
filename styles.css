@@ -398,8 +398,13 @@ table .delete-icon:hover {
   margin-bottom: 10px;
   font-weight: bold;
 }
+<<<<<<< HEAD
 #edit-form input[type=text],
 #edit-form input[type=email] {
+=======
+#edit-form input[type="text"],
+#edit-form input[type="email"] {
+>>>>>>> feature/detail-page
   width: 100%;
   padding: 10px;
   margin-bottom: 20px;
@@ -418,4 +423,20 @@ table .delete-icon:hover {
   background-color: #b5dda4;
 }
 
+<<<<<<< HEAD
+=======
+.product-link {
+  text-decoration: none !important;
+  color: inherit !important;
+  border: none !important;
+  background-color: inherit !important;
+}
+.product-link .product-card {
+  transition: transform 0.3s ease;
+}
+.product-link .product-card:hover {
+  transform: scale(1.05);
+}
+
+>>>>>>> feature/detail-page
 /*# sourceMappingURL=styles.css.map */

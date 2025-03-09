@@ -449,3 +449,18 @@ table {
     }
   }
 }
+
+.product-link {
+  text-decoration: none !important;
+  color: inherit !important;
+  border: none !important; // Asegúrate de que no haya borde
+  background-color: inherit !important; // Asegúrate de que el fondo sea consistente
+
+  .product-card {
+    transition: transform 0.3s ease;
+
+    &:hover {
+      transform: scale(1.05);
+    }
+  }
+}
