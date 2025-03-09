@@ -53,7 +53,7 @@
     </div>
 
     <?php
-    if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    if ($_SERVER["REQUEST_METHOD"] === "POST") {
         $name = $_POST['name'];
         $surname = $_POST['surname'];
         $email = $_POST['email'];
@@ -74,7 +74,6 @@
     }
     ?>
 
-    <script src="login.js"></script>
 </body>
 
 </html>
