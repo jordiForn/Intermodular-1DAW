@@ -352,3 +352,114 @@ button {
   margin: 20px auto;
   max-width: 500px;
 }
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 20px 0;
+  font-size: 16px;
+  text-align: left;
+
+  th,
+  td {
+    padding: 12px 15px;
+  }
+
+  th {
+    background-color: $color-primary;
+    color: $color-white;
+  }
+
+  tr {
+    border-bottom: 1px solid $color-border;
+  }
+
+  tr:nth-of-type(odd) {
+    background-color: $color-accent;
+  }
+
+  tr:hover {
+    background-color: $color-accent;
+    color: $color-white;
+  }
+
+  td {
+    border-right: 1px solid $color-border;
+  }
+
+  td:last-child {
+    border-right: none;
+  }
+
+  .edit-icon,
+  .delete-icon {
+    cursor: pointer;
+    color: $color-primary;
+    margin-right: 10px;
+
+    &:hover {
+      color: $color-accent;
+    }
+  }
+
+  .delete-icon {
+    color: red;
+
+    &:hover {
+      color: darkred;
+    }
+  }
+}
+
+#edit-form {
+  display: none;
+  background-color: $color-white;
+  padding: 20px;
+  border: 1px solid $color-border;
+  border-radius: 5px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  margin-top: 20px;
+
+  label {
+    display: block;
+    margin-bottom: 10px;
+    font-weight: bold;
+  }
+
+  input[type="text"],
+  input[type="email"] {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 20px;
+    border: 1px solid $color-border;
+    border-radius: 5px;
+  }
+
+  button {
+    background-color: $color-primary;
+    color: $color-white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+
+    &:hover {
+      background-color: $color-accent;
+    }
+  }
+}
+
+.product-link {
+  text-decoration: none !important;
+  color: inherit !important;
+  border: none !important; // Asegúrate de que no haya borde
+  background-color: inherit !important; // Asegúrate de que el fondo sea consistente
+
+  .product-card {
+    transition: transform 0.3s ease;
+
+    &:hover {
+      transform: scale(1.05);
+    }
+  }
+}

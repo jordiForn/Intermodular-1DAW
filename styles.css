@@ -335,4 +335,99 @@ button:hover {
   max-width: 500px;
 }
 
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 20px 0;
+  font-size: 16px;
+  text-align: left;
+}
+table th,
+table td {
+  padding: 12px 15px;
+}
+table th {
+  background-color: #4daa57;
+  color: white;
+}
+table tr {
+  border-bottom: 1px solid #754668;
+}
+table tr:nth-of-type(odd) {
+  background-color: #b5dda4;
+}
+table tr:hover {
+  background-color: #b5dda4;
+  color: white;
+}
+table td {
+  border-right: 1px solid #754668;
+}
+table td:last-child {
+  border-right: none;
+}
+table .edit-icon,
+table .delete-icon {
+  cursor: pointer;
+  color: #4daa57;
+  margin-right: 10px;
+}
+table .edit-icon:hover,
+table .delete-icon:hover {
+  color: #b5dda4;
+}
+table .delete-icon {
+  color: red;
+}
+table .delete-icon:hover {
+  color: darkred;
+}
+
+#edit-form {
+  display: none;
+  background-color: white;
+  padding: 20px;
+  border: 1px solid #754668;
+  border-radius: 5px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  margin-top: 20px;
+}
+#edit-form label {
+  display: block;
+  margin-bottom: 10px;
+  font-weight: bold;
+}
+#edit-form input[type="text"],
+#edit-form input[type="email"] {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 20px;
+  border: 1px solid #754668;
+  border-radius: 5px;
+}
+#edit-form button {
+  background-color: #4daa57;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+#edit-form button:hover {
+  background-color: #b5dda4;
+}
+
+.product-link {
+  text-decoration: none !important;
+  color: inherit !important;
+  border: none !important;
+  background-color: inherit !important;
+}
+.product-link .product-card {
+  transition: transform 0.3s ease;
+}
+.product-link .product-card:hover {
+  transform: scale(1.05);
+}
+
 /*# sourceMappingURL=styles.css.map */

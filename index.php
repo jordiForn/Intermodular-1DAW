@@ -73,10 +73,11 @@ if ($result->num_rows > 0) {
             Busques serveis?
         </a>ñ
         <?php foreach ($categories as $categoria => $productes): ?>
-        <div class="product-category">
-            <button class="toggle-button"><?= htmlspecialchars($categoria) ?></button>
-            <div class="product-list">
-                <?php foreach ($productes as $producte): ?>
+    <div class="product-category">
+        <button class="toggle-button"><?= htmlspecialchars($categoria) ?></button>
+        <div class="product-list">
+            <?php foreach ($productes as $producte): ?>
+                <a href="product_details.php?id=<?= htmlspecialchars($producte['id']) ?>" class="product-link">
                     <div class="product-card">
                         <img src="images/<?= htmlspecialchars($producte['imatge']) ?>" alt="<?= htmlspecialchars($producte['nom']) ?>">
                         <h3><?= htmlspecialchars($producte['nom']) ?></h3>
@@ -88,10 +89,11 @@ if ($result->num_rows > 0) {
                             <span class="tooltip-text">0 ítems - 0,00€</span>
                         </div>
                     </div>
-                <?php endforeach; ?>
-            </div>
+                </a>
+            <?php endforeach; ?>
         </div>
-    <?php endforeach; ?>
+    </div>
+<?php endforeach; ?>
         </div>
     </div>
     
