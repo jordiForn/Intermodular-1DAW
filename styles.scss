@@ -453,14 +453,76 @@ table {
 .product-link {
   text-decoration: none !important;
   color: inherit !important;
-  border: none !important; // Asegúrate de que no haya borde
-  background-color: inherit !important; // Asegúrate de que el fondo sea consistente
+  border: none !important;
+  background-color: inherit !important;
 
   .product-card {
     transition: transform 0.3s ease;
 
     &:hover {
       transform: scale(1.05);
+    }
+  }
+}
+
+.product-details {
+  .container {
+    max-width: 800px;
+    margin: 20px auto;
+    padding: 20px;
+    background-color: $color-white;
+    border-radius: 10px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+
+    h2 {
+      color: $color-highlight;
+      margin-bottom: 20px;
+      text-align: center;
+    }
+
+    img {
+      width: 100%;
+      height: auto;
+      border-radius: 10px;
+      margin-bottom: 20px;
+      max-width: 400px;
+      display: block;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    p {
+      font-size: 16px;
+      color: $color-secondary;
+      margin-bottom: 10px;
+    }
+
+    .price {
+      font-size: 20px;
+      font-weight: bold;
+      color: $color-primary;
+      margin-bottom: 20px;
+    }
+
+    .stock {
+      font-size: 16px;
+      color: $color-secondary;
+      margin-bottom: 20px;
+    }
+
+    .back-link {
+      display: inline-block;
+      margin-top: 20px;
+      padding: 10px 20px;
+      background-color: $color-primary;
+      color: $color-white;
+      text-decoration: none;
+      border-radius: 5px;
+      transition: background-color 0.3s ease;
+
+      &:hover {
+        background-color: $color-accent;
+      }
     }
   }
 }

@@ -42,12 +42,14 @@ if (isset($_GET['id'])) {
         <div><a href="index.php">Pàgina principal</a></div>
     </header>
 
-    <div class="container">
-        <h2><?= htmlspecialchars($producte['nom']) ?></h2>
-        <img src="images/<?= htmlspecialchars($producte['imatge']) ?>" alt="<?= htmlspecialchars($producte['nom']) ?>">
-        <p><?= htmlspecialchars($producte['descripcio']) ?></p>
-        <p class="price"><?= number_format($producte['preu'], 2, ",", ".") ?>€</p>
-        <p>Estoc disponible: <?= number_format($producte['estoc'], 0, ",", ".") ?></p>
+    <div class="product-details">
+        <div class="container">
+            <h2><?= htmlspecialchars($producte['nom']) ?></h2>
+            <img src="images/<?= htmlspecialchars($producte['imatge']) ?>" alt="<?= htmlspecialchars($producte['nom']) ?>">
+            <p><?= htmlspecialchars($producte['detalls']) ?></p>
+            <p class="price"><?= number_format($producte['preu'], 2, ",", ".") ?>€</p>
+            <p class="stock">Estoc disponible: <?= number_format($producte['estoc'], 0, ",", ".") ?></p>
+        </div>
     </div>
 </body>
 </html>
