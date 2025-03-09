@@ -3,8 +3,8 @@ $color-primary: #4daa57;
 $color-secondary: #587d71;
 $color-highlight: #754668;
 $color-accent: #b5dda4;
-$color-text: #587d71;
 $color-white: white;
+$color-border: #754668;
 
 @mixin button-style($bg-color, $hover-color) {
   background-color: $bg-color;
@@ -23,7 +23,7 @@ $color-white: white;
 body {
   font-family: Arial, sans-serif;
   background-color: $color-bg;
-  color: $color-text;
+  color: $color-secondary;
   margin: 0;
   padding: 0;
 }
@@ -84,7 +84,7 @@ header {
 
       a {
         text-decoration: none;
-        color: $color-text;
+        color: $color-secondary;
         font-weight: bold;
       }
 
@@ -127,6 +127,7 @@ header {
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  padding: 20px;
 
   h2:hover {
     cursor: default;
@@ -134,7 +135,7 @@ header {
 
   a {
     text-decoration: none;
-    color: $color-text;
+    color: $color-secondary;
     padding: 10px;
     transition: border 0.3s ease-in-out;
     font-weight: bold;
@@ -142,7 +143,7 @@ header {
   }
 
   a:hover {
-    border: 1px solid $color-text;
+    border: 1px solid $color-secondary;
     border-radius: 5px;
     background-color: $color-accent;
   }
@@ -351,4 +352,100 @@ button {
   border-radius: 10px;
   margin: 20px auto;
   max-width: 500px;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 20px 0;
+  font-size: 16px;
+  text-align: left;
+
+  th,
+  td {
+    padding: 12px 15px;
+  }
+
+  th {
+    background-color: $color-primary;
+    color: $color-white;
+  }
+
+  tr {
+    border-bottom: 1px solid $color-border;
+  }
+
+  tr:nth-of-type(odd) {
+    background-color: $color-accent;
+  }
+
+  tr:hover {
+    background-color: $color-accent;
+    color: $color-white;
+  }
+
+  td {
+    border-right: 1px solid $color-border;
+  }
+
+  td:last-child {
+    border-right: none;
+  }
+
+  .edit-icon,
+  .delete-icon {
+    cursor: pointer;
+    color: $color-primary;
+    margin-right: 10px;
+
+    &:hover {
+      color: $color-accent;
+    }
+  }
+
+  .delete-icon {
+    color: red;
+
+    &:hover {
+      color: darkred;
+    }
+  }
+}
+
+#edit-form {
+  display: none;
+  background-color: $color-white;
+  padding: 20px;
+  border: 1px solid $color-border;
+  border-radius: 5px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  margin-top: 20px;
+
+  label {
+    display: block;
+    margin-bottom: 10px;
+    font-weight: bold;
+  }
+
+  input[type="text"],
+  input[type="email"] {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 20px;
+    border: 1px solid $color-border;
+    border-radius: 5px;
+  }
+
+  button {
+    background-color: $color-primary;
+    color: $color-white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+
+    &:hover {
+      background-color: $color-accent;
+    }
+  }
 }
