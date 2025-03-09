@@ -40,12 +40,12 @@ if ($result->num_rows > 0) {
             
         }
 
-        function deleteUser(nom) {
+        function deleteUser(id) {
             if (confirm("Estàs segur que vols eliminar aquest usuari?")) {
-                fetch('update_users.php', {
+                fetch('delete_users.php', {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-                    body: 'nom=' + nom
+                    body: 'id=' + id
                 })
                 .then(response => response.text())
                 .then(data => {
@@ -77,7 +77,7 @@ if ($result->num_rows > 0) {
             })
             .then(response => response.text())
             .then(data => {
-                alert(data);
+                alert("Usuari actualitzat correctament");
                 location.reload();
             });
         }
@@ -111,7 +111,7 @@ if ($result->num_rows > 0) {
                         <td><?= htmlspecialchars($user['rol']) ?></td>
                         <td>
                             <a href="javascript:void(0);" onclick="editUser(
-                                
+
                                 '<?= (htmlspecialchars($user['nom'])) ?>', 
                                 '<?= (htmlspecialchars($user['cognom'])) ?>', 
                                 '<?= (htmlspecialchars($user['email'])) ?>', 
@@ -120,6 +120,13 @@ if ($result->num_rows > 0) {
                             )" class="edit-icon">
                                 <i class="fas fa-pencil-alt"></i>
                             </a>
+
+                            <a href="javascript:void(0);" onclick="deleteUser(
+
+                            '<?= (htmlspecialchars($user['id'])) ?>'
+                            
+                            )" class="delete-icon">
+                                <i class="fas fa-trash-alt"></i>
                         </td>
                     </tr>
                 <?php endforeach; ?>
