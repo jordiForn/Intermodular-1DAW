@@ -27,7 +27,7 @@ if ($result->num_rows > 0) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="styles.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
-    <title>Editar un producte</title>
+    <title>Editar usuaris</title>
     <script>
         function editUser(nom, cognom, email, telefon, username, rol) {
             document.getElementById('edit-nom').value = nom;
@@ -65,14 +65,6 @@ if ($result->num_rows > 0) {
             let username = document.getElementById('edit-username').value;
             let rol = document.getElementById('edit-rol').value;
 
-            console.log(id);
-            console.log(nom);
-            console.log(cognom);
-            console.log(email);
-            console.log(telefon);
-            console.log(username);
-            console.log(rol);
-
             fetch('update_users.php', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
@@ -88,7 +80,7 @@ if ($result->num_rows > 0) {
 </head>
 <body>
     <header>
-        <h1>Canviar producte</h1>
+        <h1>Canviar ususaris</h1>
         <div><a href="index.php">Pàgina principal</a></div>
     </header>
 
