@@ -64,7 +64,7 @@ if ($result->num_rows > 0) {
         <ul>
             <li><a href="new_product.php">Afegir un producte</a></li>
             <li><a href="edit_product.php">Canviar un producte</a></li>
-            <li><a href="edit-users.php">Editar usuaris</a></li>
+            <li><a href="edit_users.php">Editar usuaris</a></li>
         </ul>
     </nav>
 
