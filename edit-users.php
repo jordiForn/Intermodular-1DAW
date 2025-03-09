@@ -2,7 +2,7 @@
 include 'connection.php';
 session_start();
 
-$sql = $conn->prepare("SELECT d.nom, d.cognom, d.email, d.tlf, d.rol, c.id FROM client_dades d JOIN client_id c ON d.nom = c.nom");
+$sql = $conn->prepare("SELECT d.nom, d.cognom, d.email, d.tlf, d.rol, d.nom_login, c.id FROM client_dades d JOIN client_id c ON d.nom = c.nom");
 
 if (!$sql->execute()) {
     die("Error en la consulta de les dades: " . $sql->error);
@@ -29,11 +29,12 @@ if ($result->num_rows > 0) {
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
     <title>Editar un producte</title>
     <script>
-        function editUser(nom, cognom, email, telefon, rol) {
+        function editUser(nom, cognom, email, telefon, username, rol) {
             document.getElementById('edit-nom').value = nom;
             document.getElementById('edit-cognom').value = cognom;
             document.getElementById('edit-email').value = email;
             document.getElementById('edit-telefon').value = telefon;
+            document.getElementById('edit-username').value = username;
             document.getElementById('edit-rol').value = rol;
             document.getElementById('edit-form').style.display = 'block';
 
@@ -61,6 +62,7 @@ if ($result->num_rows > 0) {
             let cognom = document.getElementById('edit-cognom').value;
             let email = document.getElementById('edit-email').value;
             let telefon = document.getElementById('edit-telefon').value;
+            let username = document.getElementById('edit-username').value;
             let rol = document.getElementById('edit-rol').value;
 
             console.log(id);
@@ -68,6 +70,7 @@ if ($result->num_rows > 0) {
             console.log(cognom);
             console.log(email);
             console.log(telefon);
+            console.log(username);
             console.log(rol);
 
             fetch('update_users.php', {
@@ -99,6 +102,7 @@ if ($result->num_rows > 0) {
                     <th>Cognom</th>
                     <th>Email</th>
                     <th>Telefon</th>
+                    <th>Nom d'usuari</th>
                     <th>Rol</th>
                     <th>Acció</th>
                 </tr>
@@ -108,6 +112,7 @@ if ($result->num_rows > 0) {
                         <td><?= htmlspecialchars($user['cognom']) ?></td>
                         <td><?= htmlspecialchars($user['email']) ?></td>
                         <td><?= htmlspecialchars($user['tlf']) ?></td>
+                        <td><?= htmlspecialchars($user['nom_login']) ?></td>
                         <td><?= htmlspecialchars($user['rol']) ?></td>
                         <td>
                             <a href="javascript:void(0);" onclick="editUser(
@@ -115,7 +120,8 @@ if ($result->num_rows > 0) {
                                 '<?= (htmlspecialchars($user['nom'])) ?>', 
                                 '<?= (htmlspecialchars($user['cognom'])) ?>', 
                                 '<?= (htmlspecialchars($user['email'])) ?>', 
-                                '<?= (htmlspecialchars($user['tlf'])) ?>', 
+                                '<?= (htmlspecialchars($user['tlf'])) ?>',
+                                '<?= (htmlspecialchars($user['nom_login'])) ?>', 
                                 '<?= (htmlspecialchars($user['rol'])) ?>'
                             )" class="edit-icon">
                                 <i class="fas fa-pencil-alt"></i>
@@ -124,7 +130,7 @@ if ($result->num_rows > 0) {
                             <a href="javascript:void(0);" onclick="deleteUser(
 
                             '<?= (htmlspecialchars($user['id'])) ?>'
-                            
+
                             )" class="delete-icon">
                                 <i class="fas fa-trash-alt"></i>
                         </td>
@@ -148,6 +154,8 @@ if ($result->num_rows > 0) {
             <input type="email" id="edit-email" name="email" required>
             <label for="edit-telefon">Telèfon:</label>
             <input type="text" id="edit-telefon" name="telefon" required>
+            <label for="edit-username">Nom d'usuari:</label>
+            <input type="text" id="edit-username" name="nom_login" required>
             <label for="edit-rol">Rol:</label>
             <input type="text" id="edit-rol" name="rol" required>
             <button type="submit" name="edit_user" onclick="save(<?= (htmlspecialchars($user['id'])) ?>)">Guardar canvis</button>

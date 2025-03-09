@@ -7,10 +7,11 @@ $nom = $_POST['nom'];
 $cognom = $_POST['cognom'];
 $email = $_POST['email'];
 $telefon = $_POST['telefon'];
+$username = $_POST['nom_login'];
 $rol = $_POST['rol'];
 
-$sql = $conn->prepare("UPDATE client SET nom = ?, cognom = ?, email = ?, tlf = ?, rol = ? WHERE id = ?");
-$sql->bind_param("sssssi", $nom, $cognom, $email, $telefon, $rol, $id);
+$sql = $conn->prepare("UPDATE client SET nom = ?, cognom = ?, email = ?, tlf = ?, nom_login = ?, rol = ? WHERE id = ?");
+$sql->bind_param("ssssssi", $nom, $cognom, $email, $telefon, $username, $rol, $id);
 
 if ($sql->execute()) {
     echo "Dades actualitzades correctament!";
@@ -20,6 +21,5 @@ if ($sql->execute()) {
 
 $sql->close();
 $conn->close();
-
 }
 ?>
