@@ -398,8 +398,8 @@ table .delete-icon:hover {
   margin-bottom: 10px;
   font-weight: bold;
 }
-#edit-form input[type="text"],
-#edit-form input[type="email"] {
+#edit-form input[type=text],
+#edit-form input[type=email] {
   width: 100%;
   padding: 10px;
   margin-bottom: 20px;
@@ -429,6 +429,59 @@ table .delete-icon:hover {
 }
 .product-link .product-card:hover {
   transform: scale(1.05);
+}
+
+.product-details .container {
+  max-width: 800px;
+  margin: 20px auto;
+  padding: 20px;
+  background-color: white;
+  border-radius: 10px;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+}
+.product-details .container h2 {
+  color: #754668;
+  margin-bottom: 20px;
+  text-align: center;
+}
+.product-details .container img {
+  width: 100%;
+  height: auto;
+  border-radius: 10px;
+  margin-bottom: 20px;
+  max-width: 400px;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+.product-details .container p {
+  font-size: 16px;
+  color: #587d71;
+  margin-bottom: 10px;
+}
+.product-details .container .price {
+  font-size: 20px;
+  font-weight: bold;
+  color: #4daa57;
+  margin-bottom: 20px;
+}
+.product-details .container .stock {
+  font-size: 16px;
+  color: #587d71;
+  margin-bottom: 20px;
+}
+.product-details .container .back-link {
+  display: inline-block;
+  margin-top: 20px;
+  padding: 10px 20px;
+  background-color: #4daa57;
+  color: white;
+  text-decoration: none;
+  border-radius: 5px;
+  transition: background-color 0.3s ease;
+}
+.product-details .container .back-link:hover {
+  background-color: #b5dda4;
 }
 
 /*# sourceMappingURL=styles.css.map */
